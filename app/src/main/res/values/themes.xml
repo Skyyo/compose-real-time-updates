@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ExpandableList" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorSecondary">@color/purple_500</item>
+        <item name="colorAccent">@color/purple_500</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.RealTimeListItemUpdates.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RealTimeListItemUpdates.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.RealTimeListItemUpdates.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
