@@ -11,7 +11,7 @@ import kotlinx.coroutines.FlowPreview
 fun LifecycleAwareCurrenciesScreen(viewModel: LifecycleAwareCurrenciesViewModel) {
     val currencyPrices = viewModel.currencyPrices.collectAsState()
     LazyColumn {
-        itemsIndexed(currencyPrices.value) { index, currencyPrice ->
+        itemsIndexed(currencyPrices.value, { _, item -> item.id }) { index, currencyPrice ->
             LifecycleAwareCurrencyPriceCard(
                 currencyPrice = currencyPrice,
                 currencyPriceUpdateFlow = viewModel.provideCurrencyUpdateFlow(),
