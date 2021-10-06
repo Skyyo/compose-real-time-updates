@@ -1,6 +1,9 @@
 package com.skyyo.realtimelistitemupdates.currencyPricesLifecycleAware
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -8,7 +11,6 @@ import com.skyyo.realtimelistitemupdates.common.CurrencyCard
 import com.skyyo.realtimelistitemupdates.models.CurrencyPrice
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @Composable
 fun LifecycleAwareCurrencyPriceCard(
@@ -23,9 +25,7 @@ fun LifecycleAwareCurrencyPriceCard(
     }
 
     LaunchedEffect(Unit) {
-        launch {
-            lifecycleAwareCurrencyPriceFlow.collect { progress -> onCurrencyUpdated(progress) }
-        }
+        lifecycleAwareCurrencyPriceFlow.collect { progress -> onCurrencyUpdated(progress) }
     }
     DisposableEffect(Unit) { onDispose { onDisposed() } }
     CurrencyCard(currencyPrice.name, "${currencyPrice.price}", currencyPrice.priceFluctuation)
