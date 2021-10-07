@@ -3,7 +3,7 @@
     package="com.skyyo.realtimelistitemupdates">
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:name="com.skyyo.realtimelistitemupdates.RealTimeListItemUpdatesApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
