@@ -1,6 +1,5 @@
 package com.skyyo.realtimelistitemupdates.podcasts
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,33 +21,30 @@ import com.skyyo.realtimelistitemupdates.R
 import com.skyyo.realtimelistitemupdates.common.TextItem
 import com.skyyo.realtimelistitemupdates.models.Podcast
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun PodcastCard(
     podcast: Podcast,
     onDownloadClick: () -> Unit,
 ) {
-    val title = remember { podcast.title }
+    val context = LocalContext.current
     val isDownloaded = podcast.downloadProgress == 100
     val animatedProgress: Float by animateFloatAsState(podcast.downloadProgress / 100f)
     val black = Color.Black
     val white = Color.White
-    val green = Color(
-        ContextCompat.getColor(
-            LocalContext.current,
-            R.color.opacity_green
-        )
-    )
+    val green = remember {
+        Color(ContextCompat.getColor(context, R.color.opacity_green))
+    }
+
     Card(
         backgroundColor = white,
-        shape = RoundedCornerShape(8.dp),
+        shape = remember { RoundedCornerShape(8.dp) },
         elevation = 4.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
     ) {
         Row {
-            TextItem(title)
+            TextItem(podcast.title)
             Box(
                 modifier = Modifier
                     .height(56.dp)

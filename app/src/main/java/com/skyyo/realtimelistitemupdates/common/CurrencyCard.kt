@@ -23,25 +23,20 @@ import com.skyyo.realtimelistitemupdates.models.PriceFluctuation
 
 @Composable
 fun CurrencyCard(title: String, price: String, fluctuation: PriceFluctuation) {
-
+    val context = LocalContext.current
     val black = Color.Black
     val white = Color.White
-    val green = Color(
-        ContextCompat.getColor(
-            LocalContext.current,
-            R.color.opacity_green
-        )
-    )
-    val red = Color(
-        ContextCompat.getColor(
-            LocalContext.current,
-            R.color.opacity_red
-        )
-    )
+    val green = remember {
+        Color(ContextCompat.getColor(context, R.color.opacity_green))
+    }
+    val red = remember {
+        Color(ContextCompat.getColor(context, R.color.opacity_red))
+    }
+
+
     //TODO move to top
     val fluctuationColour = if (fluctuation == PriceFluctuation.UP) green else red
 
-    val rememberedTitle = remember { title }
     val animatedElevation = remember { androidx.compose.animation.core.Animatable(4f) }
     val animatedTextColour = remember { Animatable(black) }
     val animatedBorderColour = remember { Animatable(white) }
@@ -76,7 +71,9 @@ fun CurrencyCard(title: String, price: String, fluctuation: PriceFluctuation) {
     }
     Card(
         backgroundColor = Color.White,
-        shape = RoundedCornerShape(percent = 50),
+        shape = remember(animatedBorderColour) {
+            RoundedCornerShape(percent = 50)
+        },
         border = BorderStroke(1.dp, animatedBorderColour.value),
         elevation = animatedElevation.value.dp,
         modifier = Modifier
@@ -85,7 +82,7 @@ fun CurrencyCard(title: String, price: String, fluctuation: PriceFluctuation) {
             .height(56.dp)
     ) {
         Row {
-            TextItem(rememberedTitle)
+            TextItem(title)
             TextItem(
                 price,
                 color = animatedTextColour.value,

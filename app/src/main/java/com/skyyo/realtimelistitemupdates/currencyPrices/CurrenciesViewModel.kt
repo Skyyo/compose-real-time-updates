@@ -24,16 +24,14 @@ class CurrenciesViewModel : ViewModel() {
     private fun getCurrencyPrices() {
         viewModelScope.launch(Dispatchers.Default) {
             val initialCurrencyPrices = arrayListOf<CurrencyPrice>()
-            run loop@{
-                Currency.getAvailableCurrencies().forEachIndexed { index, currency ->
-                    if (index == 100) return@loop
-                    initialCurrencyPrices += CurrencyPrice(
-                        id = index,
-                        name = "1 USD to ${currency.currencyCode}",
-                        price = Random.nextInt(0, 100),
-                        priceFluctuation = PriceFluctuation.UNKNOWN
-                    )
-                }
+            Currency.getAvailableCurrencies().forEachIndexed loop@{ index, currency ->
+                if (index == 100) return@loop
+                initialCurrencyPrices += CurrencyPrice(
+                    id = index,
+                    name = "1 USD to ${currency.currencyCode}",
+                    price = Random.nextInt(0, 100),
+                    priceFluctuation = PriceFluctuation.UNKNOWN
+                )
             }
             _currencyPrices.emit(initialCurrencyPrices)
         }
