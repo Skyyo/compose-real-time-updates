@@ -3,6 +3,7 @@ package com.skyyo.realtimelistitemupdates.currencyPricesLifecycleAware
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.FlowPreview
@@ -11,10 +12,10 @@ import kotlinx.coroutines.FlowPreview
 @FlowPreview
 @Composable
 fun LifecycleAwareCurrenciesScreen(viewModel: LifecycleAwareCurrenciesViewModel) {
-    val currencyPrices = viewModel.currencyPrices.collectAsStateWithLifecycle()
+    val currencyPrices by viewModel.currencyPrices.collectAsStateWithLifecycle()
 
     LazyColumn {
-        itemsIndexed(currencyPrices.value, { _, item -> item.id }) { index, currencyPrice ->
+        itemsIndexed(currencyPrices, { _, item -> item.id }) { index, currencyPrice ->
             LifecycleAwareCurrencyPriceCard(
                 currencyPrice = currencyPrice,
                 currencyPriceUpdateFlow = viewModel.provideCurrencyUpdateFlow(),
