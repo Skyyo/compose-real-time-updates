@@ -10,7 +10,6 @@ import androidx.lifecycle.flowWithLifecycle
 import com.skyyo.realtimelistitemupdates.common.CurrencyCard
 import com.skyyo.realtimelistitemupdates.models.CurrencyPrice
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun LifecycleAwareCurrencyPriceCard(
@@ -27,6 +26,8 @@ fun LifecycleAwareCurrencyPriceCard(
     LaunchedEffect(Unit) {
         lifecycleAwareCurrencyPriceFlow.collect { progress -> onCurrencyUpdated(progress) }
     }
+
     DisposableEffect(Unit) { onDispose { onDisposed() } }
+
     CurrencyCard(currencyPrice.name, "${currencyPrice.price}", currencyPrice.priceFluctuation)
 }

@@ -58,7 +58,7 @@ class LifecycleAwareCurrenciesViewModel : ViewModel() {
         mutableCurrencies[index] = updatedCurrency
         _currencyPrices.value = mutableCurrencies.toList()
     }
-
+    //onEach also can be used to update the _currencyPrices from VM instead of UI
     fun provideCurrencyUpdateFlow(): Flow<Int> {
         return flow {
             repeat(10000) {
